@@ -1,11 +1,11 @@
 /**
- * 角色表 api 封装
+ * 学生表 api 封装
  *
  * @Author:    Razor
- * @Date:      2024-09-20 10:40:04
+ * @Date:      2024-09-22 15:31:43
  * @Copyright  @Razor
  */
-import { postRequest, getRequest } from '/src/lib/axios';
+import { postRequest, getRequest } from '/@/lib/axios';
 
 export const studentApi = {
 

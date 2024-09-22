@@ -21,15 +21,15 @@ import javax.annotation.Resource;
 import javax.validation.Valid;
 
 /**
- * 角色表 Controller
+ * 学生表 Controller
  *
  * @Author Razor
- * @Date 2024-09-20 10:40:04
+ * @Date 2024-09-22 15:31:43
  * @Copyright @Razor
  */
 
 @RestController
-@Tag(name = "角色表")
+@Tag(name = "学生表")
 public class StudentController {
 
     @Resource
@@ -59,14 +59,14 @@ public class StudentController {
     @Operation(summary = "批量删除 @author Razor")
     @PostMapping("/student/batchDelete")
     @SaCheckPermission("student:delete")
-    public ResponseDTO<String> batchDelete(@RequestBody ValidateList<Long> idList) {
+    public ResponseDTO<String> batchDelete(@RequestBody ValidateList<Integer> idList) {
         return studentService.batchDelete(idList);
     }
 
     @Operation(summary = "单个删除 @author Razor")
-    @GetMapping("/student/delete/{roleId}")
+    @GetMapping("/student/delete/{keyId}")
     @SaCheckPermission("student:delete")
-    public ResponseDTO<String> batchDelete(@PathVariable Long roleId) {
-        return studentService.delete(roleId);
+    public ResponseDTO<String> batchDelete(@PathVariable Integer keyId) {
+        return studentService.delete(keyId);
     }
 }

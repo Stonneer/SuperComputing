@@ -1,13 +1,13 @@
 <!--
-  * 角色表
+  * 学生表
   *
   * @Author:    Razor
-  * @Date:      2024-09-20 10:40:04
+  * @Date:      2024-09-22 15:31:43
   * @Copyright  @Razor
 -->
 <template>
   <a-modal
-      :title="form.roleId ? '编辑' : '添加'"
+      :title="form.keyId ? '编辑' : '添加'"
       :width="500"
       :open="visibleFlag"
       @cancel="onClose"
@@ -15,17 +15,35 @@
       :destroyOnClose="true"
   >
     <a-form ref="formRef" :model="form" :rules="rules" :label-col="{ span: 5 }" >
-        <a-form-item label="主键"  name="roleId">
-          <a-input-number style="width: 100%" v-model:value="form.roleId" placeholder="主键" />
+        <a-form-item label="ketId"  name="keyId">
+          <a-input-number style="width: 100%" v-model:value="form.keyId" placeholder="ketId" />
         </a-form-item>
-        <a-form-item label="学生名称"  name="roleName">
-          <a-input style="width: 100%" v-model:value="form.roleName" placeholder="角色名称" />
+        <a-form-item label="学号"  name="stuId">
+          <a-input-number style="width: 100%" v-model:value="form.stuId" placeholder="学号" />
         </a-form-item>
-        <a-form-item label="创建时间"  name="updateTime">
-          <a-date-picker show-time valueFormat="YYYY-MM-DD HH:mm:ss" v-model:value="form.updateTime" style="width: 100%" placeholder="创建时间" />
+        <a-form-item label="姓名"  name="stuName">
+          <a-input style="width: 100%" v-model:value="form.stuName" placeholder="姓名" />
+        </a-form-item>
+        <a-form-item label="年龄"  name="stuAge">
+          <a-input-number style="width: 100%" v-model:value="form.stuAge" placeholder="年龄" />
+        </a-form-item>
+        <a-form-item label="地址"  name="stuAddress">
+          <a-input style="width: 100%" v-model:value="form.stuAddress" placeholder="地址" />
+        </a-form-item>
+        <a-form-item label="年级"  name="stuClass">
+          <a-input style="width: 100%" v-model:value="form.stuClass" placeholder="年级" />
+        </a-form-item>
+        <a-form-item label="电话号码"  name="stuPhone">
+          <a-input style="width: 100%" v-model:value="form.stuPhone" placeholder="电话号码" />
+        </a-form-item>
+        <a-form-item label="邮箱"  name="stuEmail">
+          <a-input style="width: 100%" v-model:value="form.stuEmail" placeholder="邮箱" />
         </a-form-item>
         <a-form-item label="创建时间"  name="createTime">
           <a-date-picker show-time valueFormat="YYYY-MM-DD HH:mm:ss" v-model:value="form.createTime" style="width: 100%" placeholder="创建时间" />
+        </a-form-item>
+        <a-form-item label="更新时间"  name="updateTime">
+          <a-date-picker show-time valueFormat="YYYY-MM-DD HH:mm:ss" v-model:value="form.updateTime" style="width: 100%" placeholder="更新时间" />
         </a-form-item>
     </a-form>
 
@@ -79,26 +97,32 @@
   const formRef = ref();
 
   const formDefault = {
-      roleId: undefined, //主键
-      roleName: undefined, //角色名称
-      updateTime: undefined, //创建时间
+      keyId: undefined, //ketId
+      stuId: undefined, //学号
+      stuName: undefined, //姓名
+      stuAge: undefined, //年龄
+      stuAddress: undefined, //地址
+      stuClass: undefined, //年级
+      stuPhone: undefined, //电话号码
+      stuEmail: undefined, //邮箱
       createTime: undefined, //创建时间
+      updateTime: undefined, //更新时间
   };
 
   let form = reactive({ ...formDefault });
 
   const rules = {
-      roleId: [{ required: true, message: '主键 必填' }],
-      roleName: [{ required: true, message: '角色名称 必填' }],
-      updateTime: [{ required: true, message: '创建时间 必填' }],
+      stuId: [{ required: true, message: '学号 必填' }],
+      stuName: [{ required: true, message: '姓名 必填' }],
       createTime: [{ required: true, message: '创建时间 必填' }],
+      updateTime: [{ required: true, message: '更新时间 必填' }],
   };
 
   // 点击确定，验证表单
   async function onSubmit() {
     try {
       await formRef.value.validateFields();
-      await save();
+      save();
     } catch (err) {
       message.error('参数验证错误，请仔细填写表单数据!');
     }
@@ -108,7 +132,7 @@
   async function save() {
     SmartLoading.show();
     try {
-      if (form.roleId) {
+      if (form.keyId) {
         await studentApi.update(form);
       } else {
         await studentApi.add(form);

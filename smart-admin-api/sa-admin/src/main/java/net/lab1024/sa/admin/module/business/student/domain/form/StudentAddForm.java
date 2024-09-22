@@ -7,30 +7,48 @@ import javax.validation.constraints.NotNull;
 import lombok.Data;
 
 /**
- * 角色表 新建表单
+ * 学生表 新建表单
  *
  * @Author Razor
- * @Date 2024-09-20 10:40:04
+ * @Date 2024-09-22 15:31:43
  * @Copyright @Razor
  */
 
 @Data
 public class StudentAddForm {
 
-    @Schema(description = "主键", requiredMode = Schema.RequiredMode.REQUIRED)
-    @NotNull(message = "主键 不能为空")
-    private Long roleId;
+    @Schema(description = "ketId")
+    private Integer keyId;
 
-    @Schema(description = "角色名称", requiredMode = Schema.RequiredMode.REQUIRED)
-    @NotBlank(message = "角色名称 不能为空")
-    private String roleName;
+    @Schema(description = "学号", requiredMode = Schema.RequiredMode.REQUIRED)
+    @NotNull(message = "学号 不能为空")
+    private Integer stuId;
 
-    @Schema(description = "创建时间", requiredMode = Schema.RequiredMode.REQUIRED)
-    @NotNull(message = "创建时间 不能为空")
-    private LocalDateTime updateTime;
+    @Schema(description = "姓名", requiredMode = Schema.RequiredMode.REQUIRED)
+    @NotBlank(message = "姓名 不能为空")
+    private String stuName;
+
+    @Schema(description = "年龄")
+    private Integer stuAge;
+
+    @Schema(description = "地址")
+    private String stuAddress;
+
+    @Schema(description = "年级")
+    private String stuClass;
+
+    @Schema(description = "电话号码")
+    private String stuPhone;
+
+    @Schema(description = "邮箱")
+    private String stuEmail;
 
     @Schema(description = "创建时间", requiredMode = Schema.RequiredMode.REQUIRED)
     @NotNull(message = "创建时间 不能为空")
     private LocalDateTime createTime;
+
+    @Schema(description = "更新时间", requiredMode = Schema.RequiredMode.REQUIRED)
+    @NotNull(message = "更新时间 不能为空")
+    private LocalDateTime updateTime;
 
 }

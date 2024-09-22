@@ -5,10 +5,10 @@ import java.time.LocalDateTime;
 import lombok.Data;
 
 /**
- * 角色表 列表VO
+ * 学生表 列表VO
  *
  * @Author Razor
- * @Date 2024-09-20 10:40:04
+ * @Date 2024-09-22 15:31:43
  * @Copyright @Razor
  */
 
@@ -16,22 +16,34 @@ import lombok.Data;
 public class StudentVO {
 
 
-    @Schema(description = "主键")
-    private Long roleId;
+    @Schema(description = "ketId")
+    private Integer keyId;
 
-    @Schema(description = "角色名称")
-    private String roleName;
+    @Schema(description = "学号")
+    private Integer stuId;
 
-    @Schema(description = "角色编码")
-    private String roleCode;
+    @Schema(description = "姓名")
+    private String stuName;
 
-    @Schema(description = "角色描述")
-    private String remark;
+    @Schema(description = "年龄")
+    private Integer stuAge;
 
-    @Schema(description = "创建时间")
-    private LocalDateTime updateTime;
+    @Schema(description = "地址")
+    private String stuAddress;
+
+    @Schema(description = "年级")
+    private String stuClass;
+
+    @Schema(description = "电话号码")
+    private String stuPhone;
+
+    @Schema(description = "邮箱")
+    private String stuEmail;
 
     @Schema(description = "创建时间")
     private LocalDateTime createTime;
+
+    @Schema(description = "更新时间")
+    private LocalDateTime updateTime;
 
 }

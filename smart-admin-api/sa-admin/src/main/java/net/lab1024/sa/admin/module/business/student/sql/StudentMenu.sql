@@ -3,11 +3,11 @@
 # 如果你一切都是按照默认，那么下面的 SQL 基本不用改
 
 INSERT INTO t_menu ( menu_name, menu_type, parent_id, path, component, frame_flag, cache_flag, visible_flag, disabled_flag, perms_type, create_user_id )
-VALUES ( '角色表', 2, 0, '/student/list', '/business/student/student-list.vue', false, false, true, false, 1, 1 );
+VALUES ( '学生表', 2, 0, '/student/list', '/business/student/student-list.vue', false, false, true, false, 1, 1 );
 
 # 按菜单名称查询该菜单的 menu_id 作为按钮权限的 父菜单ID 与 功能点关联菜单ID
 SET @parent_id = NULL;
-SELECT t_menu.menu_id INTO @parent_id FROM t_menu WHERE t_menu.menu_name = '角色表';
+SELECT t_menu.menu_id INTO @parent_id FROM t_menu WHERE t_menu.menu_name = '学生表';
 
 INSERT INTO t_menu ( menu_name, menu_type, parent_id, frame_flag, cache_flag, visible_flag, disabled_flag, api_perms, perms_type, context_menu_id, create_user_id )
 VALUES ( '查询', 3, @parent_id, false, true, true, false, 'student:query', 1, @parent_id, 1 );

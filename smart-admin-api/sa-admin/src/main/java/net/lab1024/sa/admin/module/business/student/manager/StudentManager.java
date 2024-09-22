@@ -7,10 +7,10 @@ import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
 import org.springframework.stereotype.Service;
 
 /**
- * 角色表  Manager
+ * 学生表  Manager
  *
  * @Author Razor
- * @Date 2024-09-20 10:40:04
+ * @Date 2024-09-22 15:31:43
  * @Copyright @Razor
  */
 @Service

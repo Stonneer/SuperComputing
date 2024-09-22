@@ -4,19 +4,29 @@
 
     <!-- 查询结果列 -->
     <sql id="base_columns">
-        t_role.role_id,
-        t_role.role_name,
-        t_role.role_code,
-        t_role.remark,
-        t_role.update_time,
-        t_role.create_time
+--         t_student.key_id,
+        t_student.stu_id,
+        t_student.stu_name,
+        t_student.stu_age,
+        t_student.stu_address,
+        t_student.stu_class,
+        t_student.stu_phone,
+        t_student.stu_email,
+        t_student.create_time,
+        t_student.update_time
     </sql>
 
     <!-- 分页查询 -->
     <select id="queryPage" resultType="net.lab1024.sa.admin.module.business.student.domain.vo.StudentVO">
         SELECT
         <include refid="base_columns"/>
-        FROM t_role
+        FROM t_student
+        <where>
+            <!--姓名查询-->
+            <if test="queryForm.stu_name != null and queryForm.stu_name != ''">
+                        AND INSTR(t_student.stu_name,#{queryForm.stu_name})
+            </if>
+        </where>
     </select>
 
 

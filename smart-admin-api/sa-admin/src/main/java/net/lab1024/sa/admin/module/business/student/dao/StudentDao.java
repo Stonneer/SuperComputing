@@ -11,10 +11,10 @@ import org.apache.ibatis.annotations.Param;
 import org.springframework.stereotype.Component;
 
 /**
- * 角色表 Dao
+ * 学生表 Dao
  *
  * @Author Razor
- * @Date 2024-09-20 10:40:04
+ * @Date 2024-09-22 15:31:43
  * @Copyright @Razor
  */
 

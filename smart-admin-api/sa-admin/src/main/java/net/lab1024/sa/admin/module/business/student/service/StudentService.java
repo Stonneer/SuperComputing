@@ -18,10 +18,10 @@ import org.springframework.stereotype.Service;
 import javax.annotation.Resource;
 
 /**
- * 角色表 Service
+ * 学生表 Service
  *
  * @Author Razor
- * @Date 2024-09-20 10:40:04
+ * @Date 2024-09-22 15:31:43
  * @Copyright @Razor
  */
 
@@ -40,7 +40,8 @@ public class StudentService {
     public PageResult<StudentVO> queryPage(StudentQueryForm queryForm) {
         Page<?> page = SmartPageUtil.convert2PageQuery(queryForm);
         List<StudentVO> list = studentDao.queryPage(page, queryForm);
-        return SmartPageUtil.convert2PageResult(page, list);
+        PageResult<StudentVO> pageResult = SmartPageUtil.convert2PageResult(page, list);
+        return pageResult;
     }
 
     /**
@@ -70,7 +71,7 @@ public class StudentService {
      * @param idList
      * @return
      */
-    public ResponseDTO<String> batchDelete(List<Long> idList) {
+    public ResponseDTO<String> batchDelete(List<Integer> idList) {
         if (CollectionUtils.isEmpty(idList)){
             return ResponseDTO.ok();
         }
@@ -82,12 +83,12 @@ public class StudentService {
     /**
      * 单个删除
      */
-    public ResponseDTO<String> delete(Long roleId) {
-        if (null == roleId){
+    public ResponseDTO<String> delete(Integer keyId) {
+        if (null == keyId){
             return ResponseDTO.ok();
         }
 
-        studentDao.deleteById(roleId);
+        studentDao.deleteById(keyId);
         return ResponseDTO.ok();
     }
 }
