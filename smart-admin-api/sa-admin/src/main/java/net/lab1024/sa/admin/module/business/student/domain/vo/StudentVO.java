@@ -16,11 +16,8 @@ import lombok.Data;
 public class StudentVO {
 
 
-    @Schema(description = "ketId")
+    @Schema(description = "主键")
     private Integer keyId;
-
-    @Schema(description = "学号")
-    private Integer stuId;
 
     @Schema(description = "姓名")
     private String stuName;

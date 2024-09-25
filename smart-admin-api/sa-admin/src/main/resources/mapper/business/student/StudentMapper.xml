@@ -4,8 +4,7 @@
 
     <!-- 查询结果列 -->
     <sql id="base_columns">
---         t_student.key_id,
-        t_student.stu_id,
+        t_student.key_id,
         t_student.stu_name,
         t_student.stu_age,
         t_student.stu_address,

@@ -1,6 +1,7 @@
 package net.lab1024.sa.admin.module.business.student.domain.entity;
 
 import com.baomidou.mybatisplus.annotation.FieldFill;
+import com.baomidou.mybatisplus.annotation.IdType;
 import com.baomidou.mybatisplus.annotation.TableField;
 import com.baomidou.mybatisplus.annotation.TableId;
 import com.baomidou.mybatisplus.annotation.TableName;
@@ -20,15 +21,10 @@ import lombok.Data;
 public class StudentEntity {
 
     /**
-     * ketId
+     * 主键
      */
-    @TableId
+    @TableId(type = IdType.AUTO)
     private Integer keyId;
-
-    /**
-     * 学号
-     */
-    private Integer stuId;
 
     /**
      * 姓名

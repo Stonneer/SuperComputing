@@ -17,12 +17,9 @@ import lombok.Data;
 @Data
 public class StudentAddForm {
 
-    @Schema(description = "ketId")
-    private Integer keyId;
-
-    @Schema(description = "学号", requiredMode = Schema.RequiredMode.REQUIRED)
-    @NotNull(message = "学号 不能为空")
-    private Integer stuId;
+//    @Schema(description = "主键", requiredMode = Schema.RequiredMode.REQUIRED)
+//    @NotNull(message = "主键 不能为空")
+//    private Integer keyId;
 
     @Schema(description = "姓名", requiredMode = Schema.RequiredMode.REQUIRED)
     @NotBlank(message = "姓名 不能为空")

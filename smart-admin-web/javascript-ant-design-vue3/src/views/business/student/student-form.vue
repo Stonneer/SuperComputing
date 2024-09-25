@@ -15,11 +15,8 @@
       :destroyOnClose="true"
   >
     <a-form ref="formRef" :model="form" :rules="rules" :label-col="{ span: 5 }" >
-        <a-form-item label="ketId"  name="keyId">
-          <a-input-number style="width: 100%" v-model:value="form.keyId" placeholder="ketId" />
-        </a-form-item>
-        <a-form-item label="学号"  name="stuId">
-          <a-input-number style="width: 100%" v-model:value="form.stuId" placeholder="学号" />
+        <a-form-item label="主键"  name="keyId">
+          <a-input-number style="width: 100%" v-model:value="form.keyId" placeholder="主键" />
         </a-form-item>
         <a-form-item label="姓名"  name="stuName">
           <a-input style="width: 100%" v-model:value="form.stuName" placeholder="姓名" />
@@ -97,8 +94,7 @@
   const formRef = ref();
 
   const formDefault = {
-      keyId: undefined, //ketId
-      stuId: undefined, //学号
+      keyId: undefined, //主键
       stuName: undefined, //姓名
       stuAge: undefined, //年龄
       stuAddress: undefined, //地址
@@ -112,7 +108,7 @@
   let form = reactive({ ...formDefault });
 
   const rules = {
-      stuId: [{ required: true, message: '学号 必填' }],
+      // keyId: [{ required: true, message: '主键 必填' }],
       stuName: [{ required: true, message: '姓名 必填' }],
       createTime: [{ required: true, message: '创建时间 必填' }],
       updateTime: [{ required: true, message: '更新时间 必填' }],

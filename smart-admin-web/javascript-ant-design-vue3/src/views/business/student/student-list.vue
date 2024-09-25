@@ -10,7 +10,7 @@
     <a-form class="smart-query-form">
         <a-row class="smart-query-form-row">
             <a-form-item label="姓名查询" class="smart-query-form-item">
-                <a-input style="width: 200px" v-model:value="queryForm.stu_name" placeholder="姓名查询" />
+                <a-input style="width: 500px" v-model:value="queryForm.stu_name" placeholder="姓名查询" />
             </a-form-item>
             <a-form-item class="smart-query-form-item">
                 <a-button type="primary" @click="queryData">
@@ -58,7 +58,7 @@
             size="small"
             :dataSource="tableData"
             :columns="columns"
-            rowKey="stu_id"
+            rowKey="keyId"
             bordered
             :loading="tableLoading"
             :pagination="false"
@@ -128,11 +128,6 @@
         //     dataIndex: 'keyId',
         //     ellipsis: true,
         // },
-        {
-            title: '学号',
-            dataIndex: 'stuId',
-            ellipsis: true,
-        },
         {
             title: '姓名',
             dataIndex: 'stuName',
