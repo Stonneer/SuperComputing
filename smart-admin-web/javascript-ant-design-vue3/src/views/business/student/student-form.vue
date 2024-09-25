@@ -15,9 +15,9 @@
       :destroyOnClose="true"
   >
     <a-form ref="formRef" :model="form" :rules="rules" :label-col="{ span: 5 }" >
-        <a-form-item label="主键"  name="keyId">
-          <a-input-number style="width: 100%" v-model:value="form.keyId" placeholder="主键" />
-        </a-form-item>
+<!--        <a-form-item label="主键"  name="keyId">-->
+<!--          <a-input-number style="width: 100%" v-model:value="form.keyId" placeholder="主键" />-->
+<!--        </a-form-item>-->
         <a-form-item label="姓名"  name="stuName">
           <a-input style="width: 100%" v-model:value="form.stuName" placeholder="姓名" />
         </a-form-item>
