@@ -73,10 +73,6 @@
     if (rowData && !_.isEmpty(rowData)) {
       Object.assign(form, rowData);
     }
-    // 使用字典时把下面这注释修改成自己的字典字段 有多个字典字段就复制多份同理修改 不然打开表单时不显示字典初始值
-    // if (form.status && form.status.length > 0) {
-    //   form.status = form.status.map((e) => e.valueCode);
-    // }
     visibleFlag.value = true;
     nextTick(() => {
       formRef.value.clearValidate();
