@@ -1,9 +1,6 @@
 <script setup>
-import {ref, onMounted, reactive, nextTick} from 'vue';
-import axios from 'axios';
+import {ref, onMounted, reactive} from 'vue';
 import {selectFieldsApi} from "/@/api/super-computing/select-fields-api.js";
-import hideForm from "./select-fields-list.vue"
-import _ from 'lodash';
 
 
 // 声明响应式变量
@@ -51,29 +48,42 @@ onMounted(() => {
   fetchData();
 });
 
-// ------------------------ 显示与隐藏 ------------------------
-// 是否显示
-const formRef = ref();
-const visibleFlag = ref(false);
+//---------------显示与隐藏---------------
+const open = ref(false);
+const confirmLoading = ref(false);
 
-function show(rowData) {
-  Object.assign(form, formDefault);
-  if (rowData && !_.isEmpty(rowData)) {
-    Object.assign(form, rowData);
-  }
-  visibleFlag.value = true;
-  nextTick(() => {
-    formRef.value.clearValidate();
-  });
+function showModal() {
+  open.value = true;
 }
 
-function onClose() {
-  Object.assign(form, formDefault);
-  visibleFlag.value = false;
-}
+const handleOk = () => {
+  confirmLoading.value = true;
+  setTimeout(() => {
+    open.value = false;
+    confirmLoading.value = false;
+  }, 100);
+};
+defineExpose({
+  showModal
+});
+
+// ---------------保存按钮---------------
+const save = () => {
+  // todo 提交数据
+  handleOk()
+};
 </script>
 
 <template>
+  <a-modal
+      v-model:open="open"
+      title="请选择字段"
+      :confirm-loading="confirmLoading"
+      @ok="save"
+      z-index="1000"
+      ok-text="下一步"
+  >
+
     <a-transfer
         v-model:target-keys="targetKeys"
         :data-source="fields.values()"
@@ -82,36 +92,29 @@ function onClose() {
       width: '400px',
       height: '500px',
     }"
-        :operations="['选择', '取消选择']"
+        operationStyle=""
         :render="item => `${item.title}`"
         @change="handleChange"
     >
       <template #footer="{ direction }">
-        <!--      TODO 取消按钮-->
         <a-button
             v-if="direction === 'left'"
             size="small"
             style="float: left; margin: 5px"
             @click="onClose"
         >
-          取消
+          清空选择
         </a-button>
 
-        <!--      TODO 保存按钮-->
-        <a-button
-            v-else-if="direction === 'right'"
-            size="small"
-            style="float: right; margin: 5px"
-            @click="fetchData"
-        >
-          保存
-        </a-button>
 
       </template>
       <template #notFoundContent>
         <span>未查询到此字段</span>
       </template>
     </a-transfer>
+
+  </a-modal>
+
 
 </template>
 
