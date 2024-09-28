@@ -4,31 +4,28 @@ import {selectFieldsApi} from "/@/api/super-computing/select-fields-api.js";
 
 
 // 声明响应式变量
-const fields = ref([]);
-const targetKeys = ref([]);
-const items = ref([]);
-const queryFormState = {
-  pageNum: 1,
-  pageSize: 10,
-};
+let fields = ref([]);
+let targetKeys = ref([{}]);
+let items = ref([]);
 
-const emits = defineEmits(['reloadList']);
-
-const queryForm = reactive({...queryFormState});
+let emits = defineEmits(['reloadList']);
 
 // 定义获取字段的方法
 const fetchData = async () => {
   try {
-    let response = await selectFieldsApi.queryPage(queryForm);
-    items.value = response.data.list;
+    let response = await selectFieldsApi.queryFields("t_student");
+    items.value = response.data;
 
     if (items.value.length > 0) {
-      // 使用第一个对象的键作为列名
-      fields.value = Object.keys(items.value[0]).map(key => ({
-        title: key,
-        dataIndex: key,
-        key: key
-      }));
+
+      items.value.forEach(item => {
+        fields.value.push({
+          key: item.COLUMN_NAME,
+          title: item.COLUMN_NAME,
+          description: item.DATA_TYPE,
+          chosen: false
+        })
+      })
     }
     targetKeys.value = fields.value.filter(item => item.chosen).map(item => item.key);
   } catch (error) {
@@ -36,12 +33,30 @@ const fetchData = async () => {
   }
 };
 
+let data = {};
 // 处理穿梭框变化
 const handleChange = (keys, direction, moveKeys) => {
+  let selectdefields = ref("")
   console.log('targetKeys: ', keys);
   console.log('direction: ', direction);
   console.log('moveKeys: ', moveKeys);
+  keys.forEach(key => {
+   selectdefields.value += key + ","
+  })
+  console.log(selectdefields.value)
+
+  //创建一个json格式的变量
+  keys.forEach(key => {
+    console.log("Key:"+key)
+    //存入data，键为targetKeysKey，值为item.DATA_TYPE
+    items.value.forEach(item => {
+      if (key === item.COLUMN_NAME) {
+        data[key] = item.DATA_TYPE;
+      }
+    })
+  })
 };
+
 
 // 在组件挂载后调用获取字段的方法
 onMounted(() => {
@@ -67,11 +82,17 @@ defineExpose({
   showModal
 });
 
-// ---------------保存按钮---------------
+
 const save = () => {
-  // todo 提交数据
-  handleOk()
-};
+  console.log(data)
+  selectFieldsApi.saveColumn(data).then(successSave)
+}
+
+//todo 保存成功
+const successSave = (response) => {
+
+}
+
 </script>
 
 <template>
@@ -96,18 +117,7 @@ const save = () => {
         :render="item => `${item.title}`"
         @change="handleChange"
     >
-      <template #footer="{ direction }">
-        <a-button
-            v-if="direction === 'left'"
-            size="small"
-            style="float: left; margin: 5px"
-            @click="onClose"
-        >
-          清空选择
-        </a-button>
 
-
-      </template>
       <template #notFoundContent>
         <span>未查询到此字段</span>
       </template>
