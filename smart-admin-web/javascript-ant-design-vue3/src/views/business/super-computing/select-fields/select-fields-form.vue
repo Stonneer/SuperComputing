@@ -1,6 +1,6 @@
 <script setup>
 import {ref, onMounted, reactive} from 'vue';
-import {selectFieldsApi} from "/@/api/super-computing/select-fields-api.js";
+import {selectFieldsApi} from "/src/api/business/super-computing/select-fields-api.js";
 
 
 // 声明响应式变量
@@ -10,10 +10,13 @@ let items = ref([]);
 
 let emits = defineEmits(['reloadList']);
 
+
+
 // 定义获取字段的方法
 const fetchData = async () => {
   try {
-    let response = await selectFieldsApi.queryFields("t_student");
+    let tableName = await selectFieldsApi.getTableName();
+    let response = await selectFieldsApi.queryFields(tableName.data);
     items.value = response.data;
 
     if (items.value.length > 0) {
@@ -86,6 +89,7 @@ defineExpose({
 const save = () => {
   console.log(data)
   selectFieldsApi.saveColumn(data).then(successSave)
+  handleOk();
 }
 
 //todo 保存成功

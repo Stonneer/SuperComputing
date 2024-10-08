@@ -1,6 +1,6 @@
 <script setup>
 import {ref, onMounted, reactive} from 'vue';
-import {selectFieldsApi} from "/@/api/super-computing/select-fields-api.js";
+import {selectFieldsApi} from "/src/api/business/super-computing/select-fields-api.js";
 // 声明响应式变量
 let items = ref([]);
 let columns = ref([]);
@@ -10,8 +10,8 @@ let loading = ref(false);
 const fetchData = async () => {
   loading.value = true; // 开始加载
   try {
-    //todo 测试使用student表,具体实现需要传入参数
-    let response = await selectFieldsApi.queryTable("t_student");
+    let tableName = await selectFieldsApi.getTableName();
+    let response = await selectFieldsApi.queryTable(tableName.data);
     items.value = response.data;
 
     if (items.value.length > 0) {
@@ -37,7 +37,7 @@ onMounted(() => {
 
 // 表单操作
 
-import SelectFieldsForm from "/@/views/super-computing/select-fields/select-fields-form.vue";
+import SelectFieldsForm from "/src/views/business/super-computing/select-fields/select-fields-form.vue";
 
 
 const formRef = ref();

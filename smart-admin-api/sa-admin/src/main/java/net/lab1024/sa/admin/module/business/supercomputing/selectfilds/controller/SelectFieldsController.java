@@ -1,19 +1,21 @@
-package net.lab1024.sa.admin.module.supercomputing.selectfilds.controller;
+package net.lab1024.sa.admin.module.business.supercomputing.selectfilds.controller;
 
 
 import cn.dev33.satoken.annotation.SaCheckPermission;
 import io.swagger.v3.oas.annotations.Operation;
-import net.lab1024.sa.admin.module.supercomputing.selectfilds.service.impl.SelectFieldsServiceImplement;
+import net.lab1024.sa.admin.module.business.supercomputing.selectfilds.service.impl.SelectFieldsServiceImplement;
 import net.lab1024.sa.base.common.domain.ResponseDTO;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import javax.annotation.Resource;
 import java.util.List;
 import java.util.Map;
 
+/**
+ *  超算-MySQL-字段查询 Controller
+ *
+ *  @author Razor
+ */
 
 @RestController
 public class SelectFieldsController {
@@ -38,7 +40,13 @@ public class SelectFieldsController {
     @Operation(summary = "向数据源表存入选择的字段 @author Razor")
     @PostMapping("/query/saveColumn")
     @SaCheckPermission("selectedColumn:update")
-    public ResponseDTO<List<String>> saveColumn(String columnName) {
-        return ResponseDTO.ok(selectFieldsServiceImplement.saveColumn(columnName));
+    public ResponseDTO<String> saveColumn(@RequestBody String columnName) {
+        return selectFieldsServiceImplement.saveColumn(columnName);
+    }
+
+    @Operation(summary = "获取用户想要查询字段的所在表名 @author Razor")
+    @GetMapping("/query/getTableName")
+    public ResponseDTO<String> getTableName() {
+        return ResponseDTO.ok(selectFieldsServiceImplement.getTableName());
     }
 }

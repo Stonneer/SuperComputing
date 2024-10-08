@@ -1,9 +1,7 @@
-import {getRequest, postRequest} from '/@/lib/axios';
+import {getRequest, postRequest} from '/src/lib/axios';
 
 
 export const selectFieldsApi = {
-
-    //为datatable赋值
 
     queryFields: (tableName) => {
         return getRequest(`/query/getTableColumns/${tableName}`);
@@ -15,5 +13,12 @@ export const selectFieldsApi = {
 
     saveColumn: (SelectedColumn) => {
         return postRequest('/query/saveColumn', SelectedColumn);
+    },
+
+    /**
+     * 获取想要查询的表名
+     */
+    getTableName() {
+        return getRequest('/query/getTableName');
     }
 }
